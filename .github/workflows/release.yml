@@ -26,7 +26,9 @@ jobs:
       uses: google-github-actions/auth@v1
       with:
         token_format: access_token
-        workload_identity_provider: projects/474340191703/locations/global/workloadIdentityPools/github-com
+        # projects/123456789/locations/global/workloadIdentityPools/my-pool/providers/my-provider
+        # projects/474340191703/locations/global/workloadIdentityPools/github-com/providers/github-com-oidc
+        workload_identity_provider: projects/474340191703/locations/global/workloadIdentityPools/github-com/providers/github-com-oidc
         service_account: dvt-examinations-wif-ci-cd@dvt-project-examinations.iam.gserviceaccount.com
         access_token_lifetime: 600s
 
