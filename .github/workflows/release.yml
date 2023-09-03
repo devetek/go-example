@@ -1,0 +1,46 @@
+name: Release
+
+on: 
+  release:
+    types: [created]
+
+jobs:
+  releases-docker:
+    name: Tagged Docker release to Google Artifact Registry
+    runs-on: ubuntu-latest
+    
+    permissions:
+      contents: 'read'
+      id-token: 'write'
+
+    steps:
+    - name: Get tag
+      id: get-tag
+      run: echo ::set-output name=release_tag::${GITHUB_REF/refs\/tags\//}
+    - id: checkout
+      name: Checkout
+      uses: actions/checkout@v3
+
+    - id: auth
+      name: Authenticate with Google Cloud
+      uses: google-github-actions/auth@v1
+      with:
+        token_format: access_token
+        workload_identity_provider: projects/474340191703/locations/global/workloadIdentityPools/github-com
+        service_account: dvt-examinations-wif-ci-cd@dvt-project-examinations.iam.gserviceaccount.com
+        access_token_lifetime: 600s
+
+    - name: Login to Artifact Registry
+      uses: docker/login-action@v2
+      with:
+        registry: us-west2-docker.pkg.dev
+        username: oauth2accesstoken
+        password: ${{ steps.auth.outputs.access_token }}
+
+    - id: docker-push-tagged
+      name: Tag Docker image and push to Google Artifact Registry
+      uses: docker/build-push-action@v4
+      with:
+        push: true
+        tags: |
+          asia-southeast2-docker.pkg.dev/dvt-project-examinations/docker-registry/go-example:${{ steps.get-tag.outputs.release_tag }}
