@@ -2,20 +2,20 @@ name: "Monitor Changed Files"
 
 on:
   workflow_dispatch:
-  # pull_request:
-  #     branches:
-  #       - main
-  #     types:
-  #       - opened
-  #       - synchronize
-  #       - reopened
-  #       - ready_for_review
-  #       - edited
+  pull_request:
+      branches:
+        - main
+      types:
+        - opened
+        - synchronize
+        - reopened
+        - ready_for_review
+        - edited
 
 jobs:
   run-monitor-changed-files:
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Get all test, doc and src files that have changed
         id: changed-files-yaml
