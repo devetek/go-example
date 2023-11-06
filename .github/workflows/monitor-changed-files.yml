@@ -21,10 +21,6 @@ jobs:
         name: Checkout
         uses: actions/checkout@v3
       
-      - name: Get Pull Request Number
-        id: pr
-        run: echo "::set-output name=pull_request_number::$(gh pr view --json number -q .number || echo "")"
-      
       - name: Get all test, doc and src files that have changed
         id: changed-files-yaml
         uses: tj-actions/changed-files@v40
@@ -35,4 +31,4 @@ jobs:
         # if: steps.changed-files-yaml.outputs.seo_any_changed == 'true'  
         run: |
           echo "One or more SEO file(s) has changed."
-          echo "List all the files that have changed in PR ${{ steps.pr.outputs.pull_request_number }}: ${{ steps.changed-files-yaml.outputs.seo_all_changed_files }}"
+          echo "List all the files that have changed in PR ${{ github.event.pull_request.number }}: ${{ steps.changed-files-yaml.outputs.seo_all_changed_files }}"
