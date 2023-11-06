@@ -28,7 +28,7 @@ jobs:
           files_yaml_from_source_file: .github/files-in-observation.yml
       
       - name: Send Slack Notification
-        if: steps.changed-files-yaml.outputs.any_changed == 'true'
+        if: steps.changed-files-yaml.outputs.seo_any_changed == 'true'
         uses: slackapi/slack-github-action@007b2c3c751a190b6f0f040e47ed024deaa72844
         env:
           SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
