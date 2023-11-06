@@ -2,23 +2,20 @@ name: "Monitor Changed Files"
 
 on:
   workflow_dispatch:
-  # pull_request:
-  #     branches:
-  #       - main
-  #     types:
-  #       - opened
-  #       - synchronize
-  #       - reopened
-  #       - ready_for_review
-  #       - edited
+  pull_request:
+      branches:
+        - main
+      types:
+        - opened
+        - synchronize
+        - reopened
+        - ready_for_review
+        - edited
 
 jobs:
   run-monitor-changed-files:
-    name: monitor files
-    runs-on: [self-hosted, owner=cloud-platform-l4, runnerset=default-runners, env=staging, opco=tokopedia]
-    concurrency:
-      group: monitor-changed-files-${{ github.head_ref }}
-      cancel-in-progress: true
+    runs-on: ubuntu-latest
+
     steps:
       - name: Get all test, doc and src files that have changed
         id: changed-files-yaml
