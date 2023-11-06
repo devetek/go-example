@@ -1,4 +1,4 @@
 User-agent: *
-Allow: asudhasdsa
+Allow: asdsa
 Allow: /.well-known/
-Disallow: /*.pladas
+Disallow: /*.plad

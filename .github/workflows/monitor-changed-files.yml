@@ -28,11 +28,13 @@ jobs:
           files_yaml_from_source_file: .github/files-in-observation.yml
       
       - name: Send Slack Notification
+        if: steps.changed-files-yaml.outputs.any_changed == 'true'
         uses: slackapi/slack-github-action@007b2c3c751a190b6f0f040e47ed024deaa72844
         env:
           SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_HOOK }}
         with:
+          # slack format: https://api.slack.com/reference/surfaces/formatting#basics
           payload: |
             {
               "text": "Hey <!subteam^S017VDRG26R>, files that have changed in PR https://github.com/${{github.repository}}/pull/${{ github.event.pull_request.number }}: ${{ steps.changed-files-yaml.outputs.seo_all_changed_files }}"
