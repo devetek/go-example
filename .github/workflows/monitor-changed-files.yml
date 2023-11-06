@@ -1,0 +1,32 @@
+name: "Monitor Changed Files"
+
+on:
+  workflow_dispatch:
+  # pull_request:
+  #     branches:
+  #       - main
+  #     types:
+  #       - opened
+  #       - synchronize
+  #       - reopened
+  #       - ready_for_review
+  #       - edited
+
+jobs:
+  run-monitor-changed-files:
+    name: monitor files
+    runs-on: [self-hosted, owner=cloud-platform-l4, runnerset=default-runners, env=staging, opco=tokopedia]
+    concurrency:
+      group: monitor-changed-files-${{ github.head_ref }}
+      cancel-in-progress: true
+    steps:
+      - name: Get all test, doc and src files that have changed
+        id: changed-files-yaml
+        uses: tj-actions/changed-files@v40
+        with:
+          files_yaml_from_source_file: .github/files-in-observation.yml
+      - name: Run step if test file(s) change
+        # if: steps.changed-files-yaml.outputs.seo_any_changed == 'true'  
+        run: |
+          echo "One or more SEO file(s) has changed."
+          echo "List all the files that have changed: ${{ steps.changed-files-yaml.outputs.seo_all_changed_files }}"
