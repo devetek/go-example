@@ -28,7 +28,15 @@ jobs:
           files_yaml_from_source_file: .github/files-in-observation.yml
 
       - name: Run step if test file(s) change
-        # if: steps.changed-files-yaml.outputs.seo_any_changed == 'true'  
+        id: get-payload
+        if: steps.changed-files-yaml.outputs.seo_any_changed == 'true'  
         run: |
-          echo "One or more SEO file(s) has changed."
-          echo "List all the files that have changed in PR ${{ github.event.pull_request.number }}: ${{ steps.changed-files-yaml.outputs.seo_all_changed_files }}"
+          echo ::set-output name=slack_payload::'List all the files that have changed in PR https://github.com/${{github.repository}}/pull/${{ github.event.pull_request.number }}: ${{ steps.changed-files-yaml.outputs.seo_all_changed_files }}'
+      
+      - name: Send Slack Notification
+        uses: slackapi/slack-github-action@007b2c3c751a190b6f0f040e47ed024deaa72844
+        env:
+          SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_HOOK }}
+        with:
+          payload: ${{ steps.get-payload.outputs.slack_payload }}
