@@ -1,5 +1,5 @@
 seo:
-  - domain/var/robots.txt
+  - domain/var/*.txt
 # src:
 #   - src/*.ts
 #   - "!src/__tests__/**"
