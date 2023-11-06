@@ -1,4 +1,4 @@
 User-agent: *
-Allow: *
+Allow: *asda
 Allow: /.well-known/
 Disallow: /*.pl
