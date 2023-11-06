@@ -39,4 +39,4 @@ jobs:
           SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_HOOK }}
         with:
-          payload: ${{ steps.get-payload.outputs.slack_payload }}
+          slack-message: ${{ steps.get-payload.outputs.slack_payload }}
