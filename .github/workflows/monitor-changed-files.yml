@@ -35,5 +35,5 @@ jobs:
         with:
           payload: |
             {
-              "text": "List all the files that have changed in PR https://github.com/${{github.repository}}/pull/${{ github.event.pull_request.number }}: ${{ steps.changed-files-yaml.outputs.seo_all_changed_files }}"
+              "text": "@wpe-seo, files that have changed in PR https://github.com/${{github.repository}}/pull/${{ github.event.pull_request.number }}: ${{ steps.changed-files-yaml.outputs.seo_all_changed_files }}"
             }
