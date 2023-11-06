@@ -1,4 +1,4 @@
 User-agent: *
-Allow: *
+Allow: asudhasdsa
 Allow: /.well-known/
 Disallow: /*.pl
