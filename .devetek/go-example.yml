@@ -1,0 +1,35 @@
+# Cloud Devetek Standard Definition v0.0.1-alpha.0 Go Example
+version: v0.0.1-alpha.0
+
+setup:
+  language:
+    name: go
+    version: 1.21.4
+
+build:
+  target:
+    ## -> Build app non docker (tar.gz)
+    machine: # exec sequentially
+      workdir: .
+      steps:
+        - name: "Pre Build Command"
+          command:
+            - make build
+        - name: "Copy file dependency"
+          copy:
+            - source: ./domain
+              to: ./domain
+              is_file: false
+            - source: ./goexample
+              to: ./goexample
+
+run:
+  name: Golang Example App
+  description: My first go example for cloud.terpusat.com
+  command: ./goexample
+  # set environment runtime from cloud.terpusat.com
+  environment:
+    - key: ENVIRONMENT
+      value: ${ENVIRONMENT}
+    - key: HOST
+      value: ${HOST}
