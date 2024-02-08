@@ -1,7 +1,7 @@
 # Cloud Devetek Standard Definition v0.0.1-alpha.0 Go Example
 version: v0.0.1-alpha.0
 
-setup: 
+setup:
   language:
     name: go
     version: 1.21.4
@@ -14,19 +14,19 @@ build:
       steps:
         - name: "Pre Build Command"
           command:
-            - make build
+            - make build-consumer
         - name: "Copy file dependency"
           copy:
             - source: ./domain
               to: ./domain
-            - source: ./goexample
-              to: ./goexample
+            - source: ./goexampleconsumer
+              to: ./goexampleconsumer
               is_file: true
 
 run:
-  name: Golang Example App
-  description: My first go example for cloud.terpusat.com
-  command: ./goexample
+  name: Golang Example Consumer
+  description: My first go example consumer to NSQ deploy with cloud.terpusat.com
+  command: ./goexampleconsumer
   # set environment runtime from cloud.terpusat.com
   environment:
     - key: ENVIRONMENT
