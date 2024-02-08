@@ -19,9 +19,9 @@ build:
           copy:
             - source: ./domain
               to: ./domain
-              is_file: false
             - source: ./goexample
               to: ./goexample
+              is_file: true
 
 run:
   name: Golang Example App
