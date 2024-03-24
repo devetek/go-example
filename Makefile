@@ -6,3 +6,6 @@ ci-test:
 
 build:
 	@go build -o goexample main.go
+
+build-dpanel:
+	@go1.21.4 build -o go-example main.go
