@@ -13,7 +13,7 @@ type person struct {
 
 func httpHandler(w http.ResponseWriter, r *http.Request) {
 	var user *person = &person{
-		Name: "Prakasa",
+		Name: "Nedya Prakasa",
 		Age:  30,
 	}
 
