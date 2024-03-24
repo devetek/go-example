@@ -13,12 +13,12 @@ build:
       workdir: .
       steps:
         - name: "build application real from new commit"
-          command:
+          cmd:
             - make build-dpanel
         # this step will disable temporary, preparing cheap bucket or storage alternative
         # or maybe waiting for angel investor
         - name: "archive file to tarball"
-          copy:
+          archive:
             - ./domain
             - ./go-example
 
