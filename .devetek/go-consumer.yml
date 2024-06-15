@@ -24,9 +24,9 @@ build:
               is_file: true
 
 run:
-  name: Golang Example Consumer
+  name: golang-example-constumer-app
   description: My first go example consumer to NSQ deploy with cloud.terpusat.com
-  command: ./goexampleconsumer
+  command: ./go-example-consumer
   # set environment runtime from cloud.terpusat.com
   environment:
     - key: ENVIRONMENT
