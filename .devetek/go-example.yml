@@ -25,7 +25,7 @@ build:
 run:
   name: golang-example-app
   description: My first go example for cloud.terpusat.com
-  command: ./goexample
+  command: ./go-example
   # set environment runtime from cloud.terpusat.com
   # environment:
   #   - key: ENVIRONMENT
