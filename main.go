@@ -13,8 +13,8 @@ type person struct {
 
 func httpHandler(w http.ResponseWriter, r *http.Request) {
 	var user *person = &person{
-		Name: "Nedya Amrih Prakasa",
-		Age:  30,
+		Name: "Sahabat Devetek",
+		Age:  15,
 	}
 
 	w.Header().Set("content-type", "application/json")
